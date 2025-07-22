@@ -6,41 +6,35 @@ export default function NoteCard({
   title,
   body,
   pinned = false,
-  trashMode = true,
   onDelete,
   onPin,
 }) {
   return (
     <div
-      style={{
-        border: "1px solid #ccc",
-        borderRadius: "8px",
-        padding: "1rem",
-        marginBottom: "1rem",
-        backgroundColor: pinned ? "#f9f9f9" : "#fff",
-      }}
+      className={`p-4 rounded-lg shadow-md transition-shadow duration-300 hover:shadow-lg ${pinned ? "bg-yellow-100" : "bg-white"
+        }`}
     >
-      <h3 style={{ fontWeight: pinned ? "bold" : "normal" }}>
-        {title}
+      <div className="flex justify-between items-start">
+        <h3 className={`text-lg font-bold ${pinned ? "text-yellow-800" : ""}`}>
+          {title}
+        </h3>
         <button
-          style={{ marginLeft: "10px" }}
           onClick={onPin}
           title={pinned ? "Unpin note" : "Pin note"}
+          className="text-xl"
         >
           {pinned ? "📌" : "📍"}
         </button>
-      </h3>
+      </div>
 
-      <p>{body}</p>
-      {trashMode && (
-        <button
-          style={{ color: "red", marginTop: "8px" }}
-          onClick={onDelete}
-          title="Delete note"
-        >
-          🗑️
-        </button>
-      )}
+      <p className="mt-2 text-gray-700">{body}</p>
+      <button
+        onClick={onDelete}
+        title="Delete note"
+        className="mt-4 text-red-500 hover:text-red-700"
+      >
+        🗑️ Delete
+      </button>
     </div>
   );
 }
